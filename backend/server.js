@@ -1,7 +1,6 @@
 // server.js
 const express = require('express');
 const mysql = require('mysql2');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 require('dotenv').config();
@@ -52,11 +51,11 @@ const authorize = (...allowedRoles) => {
         'SELECT r.role_name FROM Users u JOIN Roles r ON u.role_id = r.role_id WHERE u.user_id = ?',
         [req.user.userId]
       );
-      
+
       if (rows.length === 0 || !allowedRoles.includes(rows[0].role_name)) {
         return res.status(403).json({ error: 'Access denied. Insufficient permissions.' });
       }
-      
+
       next();
     } catch (error) {
       res.status(500).json({ error: 'Authorization error' });
@@ -72,20 +71,20 @@ const checkPermission = (permission) => {
         'SELECT r.role_name FROM Users u JOIN Roles r ON u.role_id = r.role_id WHERE u.user_id = ?',
         [req.user.userId]
       );
-      
+
       if (rows.length === 0) {
         return res.status(403).json({ error: 'User not found' });
       }
-      
+
       const roleName = rows[0].role_name;
       const rolePermissions = getRolePermissions(roleName);
-      
+
       if (!rolePermissions.includes(permission) && !rolePermissions.includes('all')) {
-        return res.status(403).json({ 
-          error: `Access denied. ${roleName} role does not have permission: ${permission}` 
+        return res.status(403).json({
+          error: `Access denied. ${roleName} role does not have permission: ${permission}`
         });
       }
-      
+
       next();
     } catch (error) {
       res.status(500).json({ error: 'Permission check error' });
@@ -96,20 +95,20 @@ const checkPermission = (permission) => {
 // Role permissions mapping
 const getRolePermissions = (roleName) => {
   const permissions = {
-    'Admin': ['all', 'manage_users', 'manage_roles', 'view_cases', 'create_case', 'edit_case', 
-              'delete_case', 'view_criminals', 'create_criminal', 'edit_criminal', 'delete_criminal',
-              'view_investigations', 'create_investigation', 'edit_investigation', 'view_staff', 
-              'manage_staff', 'system_settings'],
+    'Admin': ['all', 'manage_users', 'manage_roles', 'view_cases', 'create_case', 'edit_case',
+      'delete_case', 'view_criminals', 'create_criminal', 'edit_criminal', 'delete_criminal',
+      'view_investigations', 'create_investigation', 'edit_investigation', 'view_staff',
+      'manage_staff', 'system_settings'],
     'Superintendent': ['view_audit_logs', 'view_cases', 'edit_case', 'assign_cases', 'view_criminals',
-                      'edit_criminal', 'view_investigations', 'assign_investigations', 'view_staff',
-                      'view_reports', 'generate_reports', 'approve_actions'],
+      'edit_criminal', 'view_investigations', 'assign_investigations', 'view_staff',
+      'view_reports', 'generate_reports', 'approve_actions'],
     'CID': ['view_cases', 'edit_case', 'view_criminals', 'create_criminal', 'edit_criminal',
-           'view_investigations', 'create_investigation', 'edit_investigation', 'view_evidence',
-           'add_evidence', 'update_case_status', 'view_reports'],
+      'view_investigations', 'create_investigation', 'edit_investigation', 'view_evidence',
+      'add_evidence', 'update_case_status', 'view_reports'],
     'NCO': ['view_cases', 'create_case', 'create_fir', 'view_criminals', 'create_criminal',
-           'view_investigations', 'basic_data_entry']
+      'view_investigations', 'basic_data_entry']
   };
-  
+
   return permissions[roleName] || [];
 };
 
@@ -151,8 +150,8 @@ app.post('/api/auth/login', async (req, res) => {
 
     const user = users[0];
 
-    const validPassword = await bcrypt.compare(password, user.password_hash);
-    if (!validPassword) {
+    // Plain text password comparison (NOT SECURE - for development only)
+    if (password !== user.password_hash) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -193,7 +192,7 @@ app.post('/api/auth/login', async (req, res) => {
 app.get('/api/cases', authenticateToken, async (req, res) => {
   try {
     const { search, status } = req.query;
-    
+
     let query = `
       SELECT c.*, cc.crime_name, cc.ipc_section, cc.severity_level,
              cr.name as primary_accused_name
@@ -202,22 +201,22 @@ app.get('/api/cases', authenticateToken, async (req, res) => {
       LEFT JOIN Criminals cr ON c.primary_accused_id = cr.criminal_id
       WHERE 1=1
     `;
-    
+
     const params = [];
-    
+
     if (search) {
       query += ' AND (c.FIR_number LIKE ? OR c.city LIKE ? OR cc.crime_name LIKE ?)';
       const searchTerm = `%${search}%`;
       params.push(searchTerm, searchTerm, searchTerm);
     }
-    
+
     if (status) {
       query += ' AND c.status = ?';
       params.push(status);
     }
-    
+
     query += ' ORDER BY c.date_reported DESC';
-    
+
     const [cases] = await pool.query(query, params);
     res.json(cases);
   } catch (error) {
@@ -378,14 +377,14 @@ app.post('/api/criminals', authenticateToken, checkPermission('create_criminal')
       `INSERT INTO Criminals (name, alias, gender, dob, height_cm, weight_kg, identifying_marks, address, is_wanted, total_cases)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)`,
       [
-        name, 
-        alias || null, 
-        gender, 
-        date_of_birth || null, 
-        height ? parseInt(height) : null, 
-        weight ? parseInt(weight) : null, 
-        distinguishing_marks || null, 
-        address || null, 
+        name,
+        alias || null,
+        gender,
+        date_of_birth || null,
+        height ? parseInt(height) : null,
+        weight ? parseInt(weight) : null,
+        distinguishing_marks || null,
+        address || null,
         is_wanted ? 1 : 0
       ]
     );
@@ -517,7 +516,7 @@ app.post('/api/investigations', authenticateToken, checkPermission('create_inves
     // Note: Investigations table uses progress_notes (not investigation_notes) and has no status column
     // Store status in progress_notes as [Status: ...]
     const notesText = status ? `[Status: ${status}] ${investigation_notes || ''}`.trim() : (investigation_notes || null);
-    
+
     const [result] = await pool.query(
       `INSERT INTO Investigations (case_id, assigned_to, progress_notes, last_updated)
        VALUES (?, ?, ?, NOW())`,
@@ -661,7 +660,7 @@ app.get('/api/dashboard/stats', authenticateToken, async (req, res) => {
     const [openCases] = await pool.query('SELECT COUNT(*) as count FROM Cases WHERE status = "Open"');
     const [wantedCriminals] = await pool.query('SELECT COUNT(*) as count FROM Criminals WHERE is_wanted = 1');
     const [activeStaff] = await pool.query('SELECT COUNT(*) as count FROM Police_Staff WHERE is_active = 1');
-    
+
     res.json({
       total_cases: totalCases[0].count,
       open_cases: openCases[0].count,
@@ -764,7 +763,7 @@ app.get('/api/users', authenticateToken, checkPermission('manage_users'), async 
        JOIN Police_Staff ps ON u.staff_id = ps.staff_id
        ORDER BY u.created_at DESC`
     );
-    
+
     res.json(users);
   } catch (error) {
     console.error('Get users error:', error);
@@ -776,24 +775,24 @@ app.get('/api/users', authenticateToken, checkPermission('manage_users'), async 
 app.post('/api/users', authenticateToken, checkPermission('manage_users'), async (req, res) => {
   try {
     const { username, password, role_id, staff_id } = req.body;
-    
+
     // Check if username exists
     const [existing] = await pool.query('SELECT user_id FROM Users WHERE username = ?', [username]);
     if (existing.length > 0) {
       return res.status(400).json({ error: 'Username already exists' });
     }
-    
-    // Hash password
-    const password_hash = await bcrypt.hash(password, 10);
-    
+
+    // Store password as plain text (NOT SECURE - for development only)
+    const password_hash = password;
+
     const [result] = await pool.query(
       'INSERT INTO Users (username, password_hash, role_id, staff_id, created_at) VALUES (?, ?, ?, ?, NOW())',
       [username, password_hash, role_id, staff_id]
     );
-    
+
     await logAudit(req.user.userId, 'CREATE', 'Users', result.insertId);
-    
-    res.status(201).json({ 
+
+    res.status(201).json({
       message: 'User created successfully',
       user_id: result.insertId
     });
@@ -807,14 +806,14 @@ app.post('/api/users', authenticateToken, checkPermission('manage_users'), async
 app.put('/api/users/:id', authenticateToken, checkPermission('manage_users'), async (req, res) => {
   try {
     const { role_id, is_active } = req.body;
-    
+
     await pool.query(
       'UPDATE Users u JOIN Police_Staff ps ON u.staff_id = ps.staff_id SET u.role_id = ?, ps.is_active = ? WHERE u.user_id = ?',
       [role_id, is_active, req.params.id]
     );
-    
+
     await logAudit(req.user.userId, 'UPDATE', 'Users', req.params.id);
-    
+
     res.json({ message: 'User updated successfully' });
   } catch (error) {
     console.error('Update user error:', error);
@@ -830,9 +829,9 @@ app.delete('/api/users/:id', authenticateToken, checkPermission('manage_users'),
       'UPDATE Police_Staff ps JOIN Users u ON ps.staff_id = u.staff_id SET ps.is_active = 0 WHERE u.user_id = ?',
       [req.params.id]
     );
-    
+
     await logAudit(req.user.userId, 'DEACTIVATE', 'Users', req.params.id);
-    
+
     res.json({ message: 'User deactivated successfully' });
   } catch (error) {
     console.error('Delete user error:', error);
@@ -866,7 +865,7 @@ app.get('/api/audit-logs', authenticateToken, checkPermission('view_audit_logs')
        ORDER BY al.timestamp DESC
        LIMIT 500`
     );
-    
+
     res.json(logs);
   } catch (error) {
     console.error('Get audit logs error:', error);

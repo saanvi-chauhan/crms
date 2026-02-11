@@ -1,4 +1,7 @@
 -- Create a fresh database
+SET FOREIGN_KEY_CHECKS = 0;
+SET SQL_SAFE_UPDATES = 0;
+DROP DATABASE IF EXISTS crms;
 CREATE DATABASE crms;
 USE crms;
 CREATE TABLE Roles (
