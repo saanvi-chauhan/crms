@@ -1,0 +1,492 @@
+================================================================================
+CRMS DATABASE - COMPLETE DATA DUMP
+Generated: 2/12/2026, 7:39:58 AM
+================================================================================
+
+
+================================================================================
+1. ROLES
+================================================================================
+[
+  {
+    "role_id": 1,
+    "role_name": "Admin"
+  },
+  {
+    "role_id": 2,
+    "role_name": "Superintendent"
+  },
+  {
+    "role_id": 3,
+    "role_name": "CID"
+  },
+  {
+    "role_id": 4,
+    "role_name": "NCO"
+  }
+]
+
+================================================================================
+2. POLICE STAFF
+================================================================================
+[
+  {
+    "staff_id": 10001,
+    "name": "Rajesh Kumar",
+    "pol_rank": "Inspector",
+    "badge_number": "BLR001",
+    "contact": "9876543210",
+    "department": "CID",
+    "join_date": "2015-06-14T18:30:00.000Z",
+    "is_active": 1
+  },
+  {
+    "staff_id": 10002,
+    "name": "Priya Sharma",
+    "pol_rank": "Sub-Inspector",
+    "badge_number": "BLR002",
+    "contact": "8765432109",
+    "department": "Crime Branch",
+    "join_date": "2018-03-19T18:30:00.000Z",
+    "is_active": 1
+  },
+  {
+    "staff_id": 10003,
+    "name": "Amit Singh",
+    "pol_rank": "Constable",
+    "badge_number": "BLR003",
+    "contact": "7654321098",
+    "department": "Patrol",
+    "join_date": "2020-01-09T18:30:00.000Z",
+    "is_active": 1
+  },
+  {
+    "staff_id": 10004,
+    "name": "Vikram Rao",
+    "pol_rank": "Superintendent",
+    "badge_number": "BLR004",
+    "contact": "6543210987",
+    "department": "Administration",
+    "join_date": "2010-11-04T18:30:00.000Z",
+    "is_active": 1
+  },
+  {
+    "staff_id": 10005,
+    "name": "Neha Patel",
+    "pol_rank": "ASI",
+    "badge_number": "BLR005",
+    "contact": "5432109876",
+    "department": "Women Cell",
+    "join_date": "2017-09-11T18:30:00.000Z",
+    "is_active": 1
+  }
+]
+
+================================================================================
+3. USERS (with Role and Staff Details)
+================================================================================
+[
+  {
+    "user_id": 1,
+    "username": "admin_vikram",
+    "password": "secret123",
+    "role_name": "Admin",
+    "staff_name": "Vikram Rao",
+    "badge_number": "BLR004",
+    "created_at": "2026-02-11T14:49:44.000Z",
+    "last_login": "2026-02-11T17:17:54.000Z"
+  },
+  {
+    "user_id": 2,
+    "username": "cid_rajesh",
+    "password": "secret123",
+    "role_name": "CID",
+    "staff_name": "Rajesh Kumar",
+    "badge_number": "BLR001",
+    "created_at": "2026-02-11T14:49:44.000Z",
+    "last_login": "2025-12-30T05:00:00.000Z"
+  },
+  {
+    "user_id": 3,
+    "username": "nco_priya",
+    "password": "secret123",
+    "role_name": "NCO",
+    "staff_name": "Priya Sharma",
+    "badge_number": "BLR002",
+    "created_at": "2026-02-11T14:49:44.000Z",
+    "last_login": null
+  },
+  {
+    "user_id": 4,
+    "username": "nco_amit",
+    "password": "secret123",
+    "role_name": "NCO",
+    "staff_name": "Amit Singh",
+    "badge_number": "BLR003",
+    "created_at": "2026-02-11T14:49:44.000Z",
+    "last_login": "2025-12-29T10:15:00.000Z"
+  }
+]
+
+================================================================================
+4. CRIME CATEGORIES
+================================================================================
+[
+  {
+    "crime_type_id": 1,
+    "ipc_section": "302",
+    "crime_name": "Murder",
+    "description": "Intentional killing of a person",
+    "severity_level": 5
+  },
+  {
+    "crime_type_id": 2,
+    "ipc_section": "379",
+    "crime_name": "Theft",
+    "description": "Stealing movable property without consent",
+    "severity_level": 3
+  },
+  {
+    "crime_type_id": 3,
+    "ipc_section": "420",
+    "crime_name": "Cheating",
+    "description": "Dishonest inducement to deliver property",
+    "severity_level": 4
+  },
+  {
+    "crime_type_id": 4,
+    "ipc_section": "354",
+    "crime_name": "Assault on Woman",
+    "description": "Assault or criminal force to woman with intent to outrage her modesty",
+    "severity_level": 4
+  },
+  {
+    "crime_type_id": 5,
+    "ipc_section": "336",
+    "crime_name": "Rash Driving",
+    "description": "Driving vehicle rashly or negligently endangering human life",
+    "severity_level": 2
+  },
+  {
+    "crime_type_id": 6,
+    "ipc_section": "498A",
+    "crime_name": "Cruelty by Husband or Relatives",
+    "description": "Cruelty by husband or his relatives towards married woman",
+    "severity_level": 4
+  },
+  {
+    "crime_type_id": 7,
+    "ipc_section": "376",
+    "crime_name": "Rape",
+    "description": "Sexual intercourse against her will",
+    "severity_level": 5
+  }
+]
+
+================================================================================
+5. CRIMINALS
+================================================================================
+[
+  {
+    "criminal_id": 20001,
+    "name": "Ramu Gowda",
+    "alias": "Chain Kaalia",
+    "dob": "1990-05-14T18:30:00.000Z",
+    "gender": "Male",
+    "address": "Majestic Area, Bangalore",
+    "height_cm": 170,
+    "weight_kg": 68,
+    "identifying_marks": "Scar on left cheek, tiger tattoo on right arm",
+    "photo_path": "photos/kaalia.jpg",
+    "case_list": [],
+    "total_cases": 0,
+    "pending_cases": 0,
+    "is_wanted": 1
+  },
+  {
+    "criminal_id": 20002,
+    "name": "Shankar Naik",
+    "alias": "Knife Babu",
+    "dob": "1985-11-19T18:30:00.000Z",
+    "gender": "Male",
+    "address": "KR Market, Bangalore",
+    "height_cm": 165,
+    "weight_kg": 75,
+    "identifying_marks": "Long scar on forehead, missing front tooth",
+    "photo_path": "photos/babu.jpg",
+    "case_list": [],
+    "total_cases": 0,
+    "pending_cases": 0,
+    "is_wanted": 0
+  },
+  {
+    "criminal_id": 20003,
+    "name": "Lakshmi Devi",
+    "alias": "Pickpocket Lakshmi",
+    "dob": "1995-08-09T18:30:00.000Z",
+    "gender": "Female",
+    "address": "Chickpet, Bangalore",
+    "height_cm": 158,
+    "weight_kg": 55,
+    "identifying_marks": "Mole on chin, henna tattoo on hands",
+    "photo_path": "photos/lakshmi.jpg",
+    "case_list": [],
+    "total_cases": 0,
+    "pending_cases": 0,
+    "is_wanted": 0
+  },
+  {
+    "criminal_id": 20004,
+    "name": "Vinod Shetty",
+    "alias": "Cyber Vinod",
+    "dob": "1992-03-21T18:30:00.000Z",
+    "gender": "Male",
+    "address": "Indiranagar, Bangalore",
+    "height_cm": 175,
+    "weight_kg": 80,
+    "identifying_marks": "No visible marks, wears glasses",
+    "photo_path": "photos/vinod.jpg",
+    "case_list": [],
+    "total_cases": 0,
+    "pending_cases": 0,
+    "is_wanted": 1
+  },
+  {
+    "criminal_id": 20005,
+    "name": "Raju Patil",
+    "alias": "Bike Raju",
+    "dob": "1988-07-29T18:30:00.000Z",
+    "gender": "Male",
+    "address": "Jayanagar, Bangalore",
+    "height_cm": 172,
+    "weight_kg": 70,
+    "identifying_marks": "Burn mark on left hand",
+    "photo_path": "photos/raju.jpg",
+    "case_list": [],
+    "total_cases": 0,
+    "pending_cases": 0,
+    "is_wanted": 0
+  }
+]
+
+================================================================================
+6. CASES (with Crime Type and Accused)
+================================================================================
+[
+  {
+    "case_id": 30001,
+    "FIR_number": "KAR/2025/BLR/001",
+    "crime_name": "Theft",
+    "ipc_section": "379",
+    "primary_accused": "Ramu Gowda",
+    "city": "Bangalore",
+    "district": "Bangalore Urban",
+    "description": "Chain snatching near Majestic bus stand",
+    "date_reported": "2025-12-14T18:30:00.000Z",
+    "status": "Under Investigation"
+  },
+  {
+    "case_id": 30002,
+    "FIR_number": "KAR/2025/BLR/002",
+    "crime_name": "Murder",
+    "ipc_section": "302",
+    "primary_accused": "Shankar Naik",
+    "city": "Bangalore",
+    "district": "Bangalore Urban",
+    "description": "Stabbing incident inside market",
+    "date_reported": "2025-12-19T18:30:00.000Z",
+    "status": "Chargesheeted"
+  },
+  {
+    "case_id": 30003,
+    "FIR_number": "KAR/2025/BLR/003",
+    "crime_name": "Theft",
+    "ipc_section": "379",
+    "primary_accused": "Lakshmi Devi",
+    "city": "Bangalore",
+    "district": "Bangalore Urban",
+    "description": "Mobile theft in crowded market",
+    "date_reported": "2025-12-27T18:30:00.000Z",
+    "status": "Open"
+  },
+  {
+    "case_id": 30004,
+    "FIR_number": "KAR/2025/BLR/004",
+    "crime_name": "Cheating",
+    "ipc_section": "420",
+    "primary_accused": "Vinod Shetty",
+    "city": "Bangalore",
+    "district": "Bangalore Urban",
+    "description": "Online fraud complaint",
+    "date_reported": "2025-12-24T18:30:00.000Z",
+    "status": "Under Investigation"
+  },
+  {
+    "case_id": 30005,
+    "FIR_number": "KAR/2025/BLR/005",
+    "crime_name": "Rash Driving",
+    "ipc_section": "336",
+    "primary_accused": null,
+    "city": "Bangalore",
+    "district": "Bangalore Urban",
+    "description": "Rash driving accident",
+    "date_reported": "2025-12-28T18:30:00.000Z",
+    "status": "Open"
+  }
+]
+
+================================================================================
+7. FIR RECORDS
+================================================================================
+[
+  {
+    "FIR_number": "KAR/2025/BLR/005",
+    "complainant_name": "Meena Gupta",
+    "complainant_contact": "9567890123",
+    "place_of_offence": "Jayanagar 4th Block",
+    "police_station": "Jayanagar PS",
+    "date_filed": "2025-12-29T02:50:00.000Z",
+    "case_status": "Open"
+  },
+  {
+    "FIR_number": "KAR/2025/BLR/003",
+    "complainant_name": "Sunita Rao",
+    "complainant_contact": "9345678901",
+    "place_of_offence": "Chickpet Main Road",
+    "police_station": "Chickpet PS",
+    "date_filed": "2025-12-28T05:30:00.000Z",
+    "case_status": "Open"
+  },
+  {
+    "FIR_number": "KAR/2025/BLR/004",
+    "complainant_name": "Deepak Jain",
+    "complainant_contact": "9456789012",
+    "place_of_offence": "100 Feet Road",
+    "police_station": "Indiranagar PS",
+    "date_filed": "2025-12-25T11:15:00.000Z",
+    "case_status": "Under Investigation"
+  },
+  {
+    "FIR_number": "KAR/2025/BLR/002",
+    "complainant_name": "Ramesh Shetty",
+    "complainant_contact": "9234567891",
+    "place_of_offence": "Inside KR Market",
+    "police_station": "KR Market PS",
+    "date_filed": "2025-12-20T03:45:00.000Z",
+    "case_status": "Chargesheeted"
+  },
+  {
+    "FIR_number": "KAR/2025/BLR/001",
+    "complainant_name": "Anil Kumar",
+    "complainant_contact": "9123456780",
+    "place_of_offence": "Near Majestic Bus Stand",
+    "police_station": "Majestic PS",
+    "date_filed": "2025-12-15T09:00:00.000Z",
+    "case_status": "Under Investigation"
+  }
+]
+
+================================================================================
+8. INVESTIGATIONS
+================================================================================
+[
+  {
+    "investigation_id": 40001,
+    "FIR_number": "KAR/2025/BLR/001",
+    "crime_name": "Theft",
+    "assigned_officer": "Rajesh Kumar",
+    "badge_number": "BLR001",
+    "progress_notes": "Suspect identified via CCTV. Chain recovered from pawn shop.",
+    "last_updated": "2025-12-18T10:00:00.000Z"
+  },
+  {
+    "investigation_id": 40002,
+    "FIR_number": "KAR/2025/BLR/002",
+    "crime_name": "Murder",
+    "assigned_officer": "Rajesh Kumar",
+    "badge_number": "BLR001",
+    "progress_notes": "Accused arrested at residence. Weapon recovered.",
+    "last_updated": "2025-12-28T04:30:00.000Z"
+  },
+  {
+    "investigation_id": 40003,
+    "FIR_number": "KAR/2025/BLR/003",
+    "crime_name": "Theft",
+    "assigned_officer": "Priya Sharma",
+    "badge_number": "BLR002",
+    "progress_notes": "Complainant statement recorded. Searching for suspect in Chickpet area.",
+    "last_updated": "2025-12-29T06:15:00.000Z"
+  },
+  {
+    "investigation_id": 40004,
+    "FIR_number": "KAR/2025/BLR/004",
+    "crime_name": "Cheating",
+    "assigned_officer": "Rajesh Kumar",
+    "badge_number": "BLR001",
+    "progress_notes": "Cyber cell tracing bank transactions. IP address identified.",
+    "last_updated": "2025-12-27T08:50:00.000Z"
+  },
+  {
+    "investigation_id": 40005,
+    "FIR_number": "KAR/2025/BLR/005",
+    "crime_name": "Rash Driving",
+    "assigned_officer": "Amit Singh",
+    "badge_number": "BLR003",
+    "progress_notes": "Hit-and-run case. Vehicle details noted from witnesses.",
+    "last_updated": "2025-12-30T03:45:00.000Z"
+  }
+]
+
+================================================================================
+9. DATABASE SUMMARY STATISTICS
+================================================================================
+[
+  {
+    "metric": "Total Roles",
+    "count": 4
+  },
+  {
+    "metric": "Total Police Staff",
+    "count": 5
+  },
+  {
+    "metric": "Active Police Staff",
+    "count": 5
+  },
+  {
+    "metric": "Total Users",
+    "count": 4
+  },
+  {
+    "metric": "Total Crime Categories",
+    "count": 7
+  },
+  {
+    "metric": "Total Criminals",
+    "count": 5
+  },
+  {
+    "metric": "Wanted Criminals",
+    "count": 2
+  },
+  {
+    "metric": "Total Cases",
+    "count": 5
+  },
+  {
+    "metric": "Open Cases",
+    "count": 2
+  },
+  {
+    "metric": "Closed Cases",
+    "count": 0
+  },
+  {
+    "metric": "Total FIRs",
+    "count": 5
+  },
+  {
+    "metric": "Total Investigations",
+    "count": 5
+  }
+]

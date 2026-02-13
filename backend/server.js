@@ -225,6 +225,24 @@ app.get('/api/cases', authenticateToken, async (req, res) => {
   }
 });
 
+app.get('/api/cases/active', authenticateToken, async (req, res) => {
+  try {
+    const [cases] = await pool.query(
+      `SELECT c.case_id, c.FIR_number, cc.crime_name, c.city, c.district, c.date_reported,
+              CASE WHEN c.primary_accused_id IS NOT NULL THEN 'Has Primary Accused' ELSE 'No Primary Accused' END as accused_status
+       FROM Cases c
+       LEFT JOIN Crime_Category cc ON c.crime_type_id = cc.crime_type_id
+       WHERE c.status IN ('Open', 'Under Investigation')
+       ORDER BY c.date_reported DESC`
+    );
+
+    res.json(cases);
+  } catch (error) {
+    console.error('Get active cases error:', error);
+    res.status(500).json({ error: 'Failed to fetch active cases' });
+  }
+});
+
 app.get('/api/cases/:id', authenticateToken, async (req, res) => {
   try {
     const [cases] = await pool.query(
@@ -245,24 +263,6 @@ app.get('/api/cases/:id', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error('Get case error:', error);
     res.status(500).json({ error: 'Failed to fetch case' });
-  }
-});
-
-app.get('/api/cases/active', authenticateToken, async (req, res) => {
-  try {
-    const [cases] = await pool.query(
-      `SELECT c.case_id, c.FIR_number, cc.crime_name, c.city, c.district, c.date_reported,
-              CASE WHEN c.primary_accused_id IS NOT NULL THEN 'Has Primary Accused' ELSE 'No Primary Accused' END as accused_status
-       FROM Cases c
-       LEFT JOIN Crime_Category cc ON c.crime_type_id = cc.crime_type_id
-       WHERE c.status IN ('Open', 'Under Investigation')
-       ORDER BY c.date_reported DESC`
-    );
-
-    res.json(cases);
-  } catch (error) {
-    console.error('Get active cases error:', error);
-    res.status(500).json({ error: 'Failed to fetch active cases' });
   }
 });
 

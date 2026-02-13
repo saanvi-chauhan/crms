@@ -1,0 +1,186 @@
+/* Cyber Security theme overrides (dark, glass, blue/black) */
+.theme-cyber {
+  --bg-900: #02030a;
+  --bg-800: #04102a;
+  --card-bg: rgba(6,10,20,0.6);
+  --card-border: rgba(0,140,255,0.12);
+  --accent-1: #0ea5ff;
+  --accent-2: #0049ff;
+  --muted: #9fb8d9;
+  --glass: rgba(255,255,255,0.03);
+  --glass-border: rgba(255,255,255,0.06);
+  color-scheme: dark;
+}
+
+/* Base background */
+.theme-cyber .min-h-screen {
+  background: radial-gradient(1200px 800px at 10% 10%, rgba(0,120,255,0.06), transparent),
+              linear-gradient(180deg, var(--bg-900) 0%, var(--bg-800) 60%);
+  color: #e6f3ff;
+}
+
+/* Glass cards (override common white card utility) */
+.theme-cyber .bg-white {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)) !important;
+  border: 1px solid var(--card-border) !important;
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6) !important;
+  color: #e6f3ff !important;
+}
+
+/* Accent buttons */
+.theme-cyber .bg-blue-600 {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2)) !important;
+  color: white !important;
+}
+
+/* Muted text */
+.theme-cyber .text-gray-600,
+.theme-cyber .text-gray-500,
+.theme-cyber .text-gray-400 {
+  color: var(--muted) !important;
+}
+
+/* Strong text */
+.theme-cyber .text-gray-800,
+.theme-cyber .text-gray-700 {
+  color: #dff0ff !important;
+}
+
+/* Table headers and borders */
+.theme-cyber .bg-gray-50 {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+}
+.theme-cyber .border-gray-200 {
+  border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Sidebar tweaks */
+.theme-cyber .bg-gradient-to-b.from-gray-900.to-gray-800 {
+  background: linear-gradient(180deg,#001022 0%, #02102a 100%) !important;
+}
+
+/* Small helper glass utility */
+.theme-cyber .glass {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+/* Adjust shadows to match cyber theme */
+.theme-cyber .shadow-lg {
+  box-shadow: 0 10px 30px rgba(0,40,80,0.6) !important;
+}
+
+/* Make badges stand out */
+.theme-cyber .px-3.py-1.rounded-full.text-xs.font-semibold {
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Inputs */
+.theme-cyber input, .theme-cyber select, .theme-cyber textarea {
+  background: rgba(255,255,255,0.02) !important;
+  border: 1px solid rgba(255,255,255,0.04) !important;
+  color: #e6f3ff !important;
+}
+
+/* Links and interactive text */
+.theme-cyber a, .theme-cyber .text-blue-600 {
+  color: var(--accent-1) !important;
+}
+
+/* Make modal overlays darker */
+.theme-cyber .fixed.inset-0.bg-black.bg-opacity-50 {
+  background-color: rgba(0,0,0,0.65) !important;
+}
+
+/* Subtle accent glow */
+.theme-cyber .accent-glow {
+  box-shadow: 0 6px 24px rgba(14,165,255,0.16);
+}
+
+/* Ensure code blocks remain readable */
+.theme-cyber pre, .theme-cyber code {
+  background: rgba(0,0,0,0.3) !important;
+  color: #cfe9ff !important;
+}
+
+/* Darker global containers and backgrounds to improve contrast */
+.theme-cyber .flex-1.p-8 {
+  background: linear-gradient(180deg, rgba(2,6,23,0.55), rgba(3,8,28,0.45));
+  border-left: 1px solid rgba(255,255,255,0.02);
+}
+
+/* Make most light grays darker within the theme */
+.theme-cyber .bg-gray-100 {
+  background: rgba(255,255,255,0.02) !important;
+}
+
+.theme-cyber .bg-gray-50 {
+  background: rgba(255,255,255,0.015) !important;
+}
+
+/* Table rows and cards get stronger dark surfaces */
+.theme-cyber table tr, .theme-cyber .table-row, .theme-cyber .bg-white {
+  background: linear-gradient(180deg, rgba(6,8,16,0.6), rgba(6,8,16,0.5)) !important;
+  color: #eaf6ff !important;
+}
+
+/* Stronger text contrast for common text classes */
+.theme-cyber .text-gray-600, .theme-cyber .text-gray-700, .theme-cyber .text-gray-800 {
+  color: #cfe9ff !important;
+}
+
+.theme-cyber .text-gray-500, .theme-cyber .text-gray-400 {
+  color: #97b8d9 !important;
+}
+
+/* Ensure headers stand out */
+.theme-cyber h1, .theme-cyber h2, .theme-cyber h3, .theme-cyber h4, .theme-cyber h5 {
+  color: #e8f9ff !important;
+}
+
+/* Darker modal background */
+.theme-cyber .fixed.inset-0.bg-black.bg-opacity-50 {
+  background-color: rgba(0,0,0,0.75) !important;
+}
+
+/* Buttons with subtle darker border to separate from background */
+.theme-cyber .bg-blue-600 {
+  border: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* Make side-nav text and items clearer */
+.theme-cyber .w-72.bg-gradient-to-b.from-gray-900.to-gray-800 p, .theme-cyber .w-72.bg-gradient-to-b.from-gray-900.to-gray-800 .font-medium {
+  color: #e7f7ff !important;
+}
+
+/* Fallback for any remaining white backgrounds */
+.theme-cyber [class*="bg-white"] {
+  background: linear-gradient(180deg, rgba(10,14,24,0.62), rgba(8,12,22,0.5)) !important;
+  border: 1px solid rgba(255,255,255,0.03) !important;
+  color: #eaf6ff !important;
+}
+
+
+/* Login and other bright blue gradients -> darker cyber versions */
+.theme-cyber .bg-gradient-to-br.from-blue-900.via-blue-800.to-blue-600 {
+  background: linear-gradient(135deg,#001022 0%, #002a4d 40%, #00162a 100%) !important;
+}
+
+/* Hover states for blue buttons */
+.theme-cyber .hover\:from-blue-700:hover {
+  background: linear-gradient(90deg,#0066cc,#003f99) !important;
+}
+.theme-cyber .hover\:to-blue-800:hover {
+  background: linear-gradient(90deg,#0049ff,#001f66) !important;
+}
+
+/* Subtle accent border for focused inputs */
+.theme-cyber input:focus, .theme-cyber select:focus, .theme-cyber textarea:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(14,165,255,0.06) !important;
+  border-color: rgba(14,165,255,0.22) !important;
+}
